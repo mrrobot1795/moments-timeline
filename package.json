@@ -1,0 +1,35 @@
+{
+	"name": "image-timeline",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev --turbopack",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"format": "npx prettier . --write"
+	},
+	"dependencies": {
+		"bcryptjs": "^3.0.3",
+		"jsonwebtoken": "^9.0.3",
+		"mongodb": "^7.0.0",
+		"next": "^16.1.1",
+		"nodemailer": "^7.0.12",
+		"prettier": "^3.7.4",
+		"react": "^19.2.3",
+		"react-dom": "^19.2.3"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.1.18",
+		"@types/bcryptjs": "^2.4.6",
+		"@types/jsonwebtoken": "^9.0.10",
+		"@types/node": "^25.0.3",
+		"@types/nodemailer": "^7.0.4",
+		"@types/react": "^19.2.7",
+		"@types/react-dom": "^19.2.3",
+		"eslint": "^9.39.2",
+		"eslint-config-next": "^16.1.1",
+		"tailwindcss": "^4.1.18",
+		"typescript": "^5.9.3"
+	}
+}
