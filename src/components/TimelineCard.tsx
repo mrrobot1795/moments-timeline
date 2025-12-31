@@ -49,7 +49,7 @@ export function TimelineCard({ item, onUpdate, onDelete }: Readonly<TimelineCard
 						<div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
 
 						{/* Expand icon on hover */}
-						<div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+						<div className="absolute inset-0 flex items-center justify-center sm:opacity-100 sm:group-hover:opacity-100 transition-opacity duration-300">
 							<div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center">
 								<ExpandIcon className="w-6 h-6 text-white" />
 							</div>
@@ -57,11 +57,12 @@ export function TimelineCard({ item, onUpdate, onDelete }: Readonly<TimelineCard
 					</button>
 					{/* Delete button */}
 					<button
+						type="button"
 						onClick={e => {
 							e.stopPropagation();
 							onDelete(item.id);
 						}}
-						className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-500/80"
+						className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center opacity-100 sm:group-hover:opacity-100 transition-all duration-300 hover:bg-red-500/80"
 					>
 						<CloseIcon className="w-4 h-4 text-white" />
 					</button>
