@@ -1,7 +1,7 @@
 'use client';
 
-import { Header, AmbientBackground, UploadZone, Timeline, EmptyState, Login } from '@/components';
-import { useTimeline, useFileUpload, useAuth } from '@/hooks';
+import { Header, AmbientBackground, UploadZone, Timeline, EmptyState, Login, Toast } from '@/components';
+import { useTimeline, useFileUpload, useAuth, useToast } from '@/hooks';
 
 function LoadingSpinner() {
 	return (
@@ -15,9 +15,24 @@ function LoadingSpinner() {
 export default function ImageTimeline() {
 	const { user, isLoading: authLoading, isAuthenticated, login, logout } = useAuth();
 	const { items, isLoading, error, addItem, updateItem, deleteItem, clearError } = useTimeline(isAuthenticated);
+	const { toast, showToast, hideToast } = useToast();
 
+	const handleAddItem = async (imageUrl: string, fileName: string) => {
+		await addItem(imageUrl, fileName);
+		showToast('Moment added!', 'success');
+	};
+
+	const handleUpdateItem = async (id: string, updates: { caption?: string; date?: string }) => {
+		await updateItem(id, updates);
+		showToast('Moment updated!', 'success');
+	};
+
+	const handleDeleteItem = async (id: string) => {
+		await deleteItem(id);
+		showToast('Moment deleted', 'info');
+	};
 	const { isDragging, fileInputRef, handleDrop, handleDragOver, handleDragLeave, handleFileSelect, openFilePicker } = useFileUpload({
-		onFileProcessed: addItem,
+		onFileProcessed: handleAddItem,
 		maxWidth: 1920, // Adjust max dimensions
 		maxHeight: 1080,
 		quality: 0.8,
@@ -48,7 +63,7 @@ export default function ImageTimeline() {
 		}
 
 		if (items.length > 0) {
-			return <Timeline items={items} onUpdateItem={updateItem} onDeleteItem={deleteItem} />;
+			return <Timeline items={items} onUpdateItem={handleUpdateItem} onDeleteItem={handleDeleteItem} />;
 		}
 
 		return <EmptyState />;
@@ -83,6 +98,7 @@ export default function ImageTimeline() {
 				{/* Loading state */}
 				{renderContent()}
 			</div>
+			{toast && <Toast message={toast.message} type={toast.type} onClose={hideToast} />}
 		</main>
 	);
 }
