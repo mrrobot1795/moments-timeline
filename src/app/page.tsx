@@ -18,6 +18,9 @@ export default function ImageTimeline() {
 
 	const { isDragging, fileInputRef, handleDrop, handleDragOver, handleDragLeave, handleFileSelect, openFilePicker } = useFileUpload({
 		onFileProcessed: addItem,
+		maxWidth: 1920, // Adjust max dimensions
+		maxHeight: 1080,
+		quality: 0.8,
 	});
 
 	// Show loading while checking auth
